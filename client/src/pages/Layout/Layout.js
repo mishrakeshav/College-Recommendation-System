@@ -209,7 +209,7 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <div styles={{margin : '80px'}}>
             <Switch>
               <Route path={path} exact>
                       Search 
@@ -222,7 +222,7 @@ function DashboardContent() {
               </Route>
             </Switch>
             <Copyright sx={{ pt: 4 }} />
-          </Container>
+          </div>
         </Box>
       </Box>
     </ThemeProvider>
