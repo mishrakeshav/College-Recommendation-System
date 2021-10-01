@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {
     Grid, 
     Paper,
@@ -6,7 +6,15 @@ import {
     Button,
     Slider,
     Typography,
-    MenuItem
+    MenuItem,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableFooter,
+    TableHead,
+    TableRow,
+
 } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
@@ -16,6 +24,17 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import useStyles from './styles';
+import SearchIcon from '@mui/icons-material/Search';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
+
+import CollegeFormDialog from '../../components/CollegeFormDialog/CollegeFormDialog';
+
+
+
+
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -27,17 +46,38 @@ const MenuProps = {
   },
 };
 
+
+const tableCells = [
+    { key : 'institute_name', label : 'Institute Name'},
+    { key : 'state', label : 'State'},
+    { key : 'city', label : 'City'},
+    { key : 'branch', label : 'Branch'},
+    { key : 'fees', label : 'Fees'},
+    { key : 'avg_placement', label : 'Averege Placement Package'},
+    { key : 'view', label : 'View'},
+]
+
 const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
+    'Boys Hostel',
+    'Girls Hostel',
+    'Gym',
+    'Library',
+    'Sports',
+    'Cafeteria',
+    'Medical/Hospital',
+    'Wifi',
+    'IT Infrastructure',
+    'Laboratories',
+    'Swimming',
+    'Pool',
+    'Convenience Store',
+    'Alumni Associations',
+    'Guest Room',
+    'Banks Facilities',
+    'Auditorium',
+    'Transport',
+    'Parking Facility',
+    'Convenience Store',
 ];
 function getStyles(name, personName, theme) {
     return {
@@ -50,7 +90,19 @@ function getStyles(name, personName, theme) {
   
 
 const ViewColleges = () => {
-    const [personName, setPersonName] = React.useState([]);
+    const [personName, setPersonName] = useState([]);
+    const [searchParameters, setSearchParameters] = useState({});
+    const [colleges, setColleges] = useState([
+        {
+            id : 1,
+            institute_name : 'KJ Somaiya Institute of Engineering',
+            state : 'Maharashtra',
+            city : 'Mumbai',
+            branch : 'Information Technology',
+            fees : '100K',
+            package : '12LPA',
+        }
+    ]);
     const theme = useTheme();
     const handleChange = (event) => {
         const {
@@ -60,7 +112,11 @@ const ViewColleges = () => {
           // On autofill we get a the stringified value.
           typeof value === 'string' ? value.split(',') : value,
         );
-      };
+    };
+    const handleSearchParameterChange = (e)=>{
+        setSearchParameters({...searchParameters, [e.target.name]:e.target.value});
+        console.log(searchParameters);
+    }
 
     console.log("View")
     const classes = useStyles();
@@ -73,8 +129,10 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Search Institute  Name"
-                            name="college_name"
+                            name="institute_name"
                             fullWidth
+                            onChange={handleSearchParameterChange}
+                            value={searchParameters.institute_name}
                             size="small"
                         >
                         </TextField>
@@ -83,8 +141,10 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Search By State"
-                            name="college_name"
+                            name="state"
                             fullWidth
+                            onChange={handleSearchParameterChange}
+                            value={searchParameters.state}
                             size="small"
                         >
                         </TextField>
@@ -93,7 +153,9 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Search By City"
-                            name="college_name"
+                            name="city"
+                            onChange={handleSearchParameterChange}
+                            value={searchParameters.city}
                             fullWidth
                             size="small"
                         >
@@ -103,8 +165,10 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Search By Branch"
-                            name="college_name"
+                            name="branch"
                             fullWidth
+                            onChange={handleSearchParameterChange}
+                            value={searchParameters.branch}
                             size="small"
                         >
                         </TextField>
@@ -113,8 +177,10 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Sort By"
-                            name="college_name"
+                            name="sort_by"
                             fullWidth
+                            onChange={handleSearchParameterChange}
+                            value={searchParameters.sort_by}
                             select
                             size="small"
                         >
@@ -129,7 +195,9 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Averegae Placement Package"
-                            name="college_name"
+                            name="average_package"
+                            onChange={handleSearchParameterChange}
+                            value={searchParameters.average_package}
                             fullWidth
                             select
                             size="small"
@@ -147,7 +215,9 @@ const ViewColleges = () => {
                         <Slider 
                             min={50000}
                             max={500000}
-                            
+                            onChange={(e)=>{
+                                setSearchParameters({...searchParameters, fees: e.target.value })
+                            }}
                             aria-label="Default" 
                             valueLabelDisplay="auto" 
                         />
@@ -184,12 +254,66 @@ const ViewColleges = () => {
                         </Select>
                         </FormControl>
                     </Grid>
+                    <Grid item xs={12} sm={12} lg={12} justifyContent="center">
+                        <div align="center">
+                        <Button variant="contained">
+                            <SearchIcon /> Search
+                        </Button>
+                        </div>
+                    </Grid>
                 </Grid>
             </Paper>
         </Grid>
         <Grid item xs={12} sm={12} lg={12}>
             <Paper className={classes.paper} elevation={5}>
-                HEY
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            {
+                                tableCells.map((value)=>(
+                                    <TableCell key={value.key} >
+                                        {value.label}
+                                    </TableCell>
+                                ))
+                            }
+                            
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {colleges.map((value,idx)=>(
+                            <TableRow  key={value.id}>
+                                <TableCell>
+                                    {value.institute_name}
+                                </TableCell>
+                                <TableCell>
+                                    {value.state}
+                                </TableCell>
+                                <TableCell>
+                                    {value.city}
+                                </TableCell>
+                                <TableCell>
+                                    {value.branch}
+                                </TableCell>
+                                <TableCell>
+                                    {value.fees}
+                                </TableCell>
+                                <TableCell>
+                                    {value.package}
+                                </TableCell>
+                                <TableCell>
+                                    <CollegeFormDialog value={value} />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                    <TableFooter>
+                   
+                    </TableFooter>
+                </Table>
+                <div align="right">
+                        <Button  ><NavigateBeforeIcon /></Button>
+                        <Button  ><NavigateNextIcon /></Button>
+                </div>
             </Paper>
         </Grid>
     </Grid>

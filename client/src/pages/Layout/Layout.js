@@ -168,30 +168,14 @@ function DashboardContent() {
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <ShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Orders" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Customers" />
-            </ListItem>
+          
             <ListItem button>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
-              <ListItemText primary="Reports" />
+              <ListItemText primary="Recommendation" />
             </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <LayersIcon />
-              </ListItemIcon>
-              <ListItemText primary="Integrations" />
-            </ListItem>
+           
           </List>
           <Divider />
           <List></List>
