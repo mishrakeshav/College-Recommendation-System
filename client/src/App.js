@@ -40,6 +40,9 @@ class App extends Component {
             <Route exact path="/">
               <Home />
             </Route>
+            <Route path="/dashboard">
+              <Layout />
+            </Route>
             
           </Switch>
           </BrowserRouter>
