@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'recommendation.apps.RecommendationConfig'
 ]
 
 MIDDLEWARE = [
@@ -78,7 +80,11 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+<<<<<<< HEAD
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+=======
+        'NAME': os.path.join(BASE_DIR , 'db.sqlite3'),
+>>>>>>> 2cea9bfd2affb4a5f6c6f6d8b0cd9bc1c7ef2667
     }
 }
 
