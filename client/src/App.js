@@ -34,19 +34,20 @@ class App extends Component {
 
   render() {
     return (
-      <ChakraProvider theme={theme}>
+      
           <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/dashboard">
-              <Layout />
-            </Route>
-            
-          </Switch>
+            <Switch>
+              <Route exact path="/">
+                <ChakraProvider theme={theme}>
+                  <Home />
+                </ChakraProvider>
+              </Route>
+              <Route path="/dashboard">
+                <Layout />
+              </Route>
+              
+            </Switch>
           </BrowserRouter>
-      </ChakraProvider>
     );
   }
 }
