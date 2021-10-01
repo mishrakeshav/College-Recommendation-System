@@ -27,7 +27,7 @@ const KuttyHero = () => {
           letterSpacing={{ base: "normal", md: "tight" }}
           color={useColorModeValue("gray.900",'gray.100')}
         >
-          The future is{" "}
+          College Recommendation{" "}
           <Text
             display={{ base: "block", lg: "inline" }}
             w="full"
@@ -35,7 +35,7 @@ const KuttyHero = () => {
             bgGradient="linear(to-r, blue.400,red.500)"
             fontWeight="extrabold"
           >
-              Decentralized
+              System
           </Text>{" "}
           
         </chakra.h1>
@@ -45,7 +45,7 @@ const KuttyHero = () => {
           fontSize={{ base: "lg", md: "xl" }}
           color={useColorModeValue("gray.600",'gray.300')}
         >
-          A decentralized crowdfunding platform
+          A college recommendation system for engineering students 
         </chakra.p>
         <Stack
         direction={{base:"column",sm:"row"}}
@@ -64,7 +64,7 @@ const KuttyHero = () => {
             size="lg"
             cursor="pointer"            
           >
-            <Link to="/donation-based-crowdfundings">
+            <Link to="/dashboard">
               Get Started
               <Icon boxSize={4} ml={1} viewBox="0 0 20 20" fill="currentColor">
                 <path
@@ -75,7 +75,7 @@ const KuttyHero = () => {
               </Icon>
             </Link>
           </Button>
-          <Button
+          {/* <Button
             as="a"
             colorScheme="gray"
             display="inline-flex"
@@ -96,7 +96,7 @@ const KuttyHero = () => {
                 />
               </Icon>
             </Link>
-          </Button>
+          </Button> */}
         </Stack>
       </Box>
       <Box
