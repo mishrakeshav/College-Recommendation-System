@@ -14,3 +14,7 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 export default useStyles;
+// cyan #71F3D8
+// pink #ED4A53
+// black-grey #1D1D1D
+// off white #9A9A9A

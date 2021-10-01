@@ -60,6 +60,7 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
     })(({ theme, open }) => ({
       zIndex: theme.zIndex.drawer + 1,
+      background:'#022E57',
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -67,9 +68,11 @@ const AppBar = styled(MuiAppBar, {
       ...(open && {
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
+        background:'#022E57',
         transition: theme.transitions.create(['width', 'margin'], {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.enteringScreen,
+        
         }),
       }),
     }));
@@ -78,6 +81,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   ({ theme, open }) => ({
     '& .MuiDrawer-paper': {
       position: 'relative',
+      background:'#022E57',
       whiteSpace: 'nowrap',
       width: drawerWidth,
       transition: theme.transitions.create('width', {
@@ -134,7 +138,7 @@ function DashboardContent() {
             <Typography
               component="h1"
               variant="h6"
-              color="inherit"
+              color="white"
               noWrap
               sx={{ flexGrow: 1 }}
             >
@@ -157,36 +161,33 @@ function DashboardContent() {
             }}
           >
             <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
+              <ChevronLeftIcon style={{fill:'#F9F7F7'}} />
             </IconButton>
           </Toolbar>
-          <Divider />
+          <Divider style={{background:'#DBE2EF'}} />
           <List>
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardIcon />
+            <ListItem component={Link} href='/dashboard/search'>
+              <ListItemIcon >
+                <DashboardIcon style={{fill:'#F9F7F7'}} />
               </ListItemIcon>
-              <ListItemText primary="Dashboard" />
+              <ListItemText style={{color:'#F9F7F7'}} primary="Dashboard" />
             </ListItem>
           
-            <ListItem button>
+            <ListItem component={Link} href='/dashboard/recommendation'>
               <ListItemIcon>
-                <BarChartIcon />
+                <BarChartIcon style={{fill:'#F9F7F7'}} />
               </ListItemIcon>
-              <ListItemText primary="Recommendation" />
+              <ListItemText style={{color:'#F9F7F7'}} primary="Recommendation" />
             </ListItem>
            
           </List>
-          <Divider />
+          <Divider style={{background:'#DBE2EF'}} />
           <List></List>
         </Drawer>
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: '#F9F7F7',
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
