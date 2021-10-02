@@ -10,7 +10,7 @@ import pandas as pd
 from recommendation.models import College
 df = pd.read_csv('../dataset/finalultrapromax.csv', sep=',')
 colleges = []
-for i in range(1,len(df)):
+for i in range(df.shape[0]):
     colleges.append(
         College(
             institute_name=df.iloc[i][1],

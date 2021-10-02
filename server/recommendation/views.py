@@ -3,6 +3,12 @@ from .models import College
 from .serializers import CollegeSerializer
 import django_filters.rest_framework
 from rest_framework import filters
+from django.shortcuts import get_object_or_404
+
+
+class CollegeDetail(generics.RetrieveAPIView):
+    queryset = College.objects.all()
+    serializer_class = CollegeSerializer
 
 
 class CollegeList(generics.ListAPIView):
