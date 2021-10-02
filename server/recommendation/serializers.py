@@ -13,14 +13,14 @@ class CollegeSerializer(serializers.ModelSerializer):
     class Meta:
         model = College
         fields = [
-        'institute_name', 
-        'percentile', 
+        'institute_name',
+        'percentile',
         'avg_percentile',
-        'state', 
-        'city', 
-        'branch', 
+        'state',
+        'city',
+        'branch',
         'fees',
-        'rank', 
-        'rating', 
+        'rank',
+        'rating',
         'facilities'
     ]

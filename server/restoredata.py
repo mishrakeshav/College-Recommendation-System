@@ -38,5 +38,4 @@ for i in range(1,len(df)):
         )
     )
 
-print(colleges[:10])
 College.objects.bulk_create(colleges);
