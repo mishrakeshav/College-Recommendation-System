@@ -21,6 +21,8 @@ for i in range(df.shape[0]):
             rank = df.iloc[i][4],
             percentile = df.iloc[i][5],
             avg_percentile = df.iloc[i][9],
+            w0 = df.iloc[i][9],
+            w10 = df.iloc[i][5],
             w1 = df.iloc[i][10],
             w2 = df.iloc[i][11],
             w3 = df.iloc[i][12],

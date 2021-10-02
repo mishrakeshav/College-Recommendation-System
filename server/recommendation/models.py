@@ -15,6 +15,7 @@ class College(models.Model):
     avg_percentile = models.FloatField(blank=True, null=True)
 
     # weights
+    w0 = models.FloatField(blank=True, null=True)
     w1 = models.FloatField(blank=True, null=True)
     w2 = models.FloatField(blank=True, null=True)
     w3 = models.FloatField(blank=True, null=True)
@@ -24,6 +25,7 @@ class College(models.Model):
     w7 = models.FloatField(blank=True, null=True)
     w8 = models.FloatField(blank=True, null=True)
     w9 = models.FloatField(blank=True, null=True)
+    w10 = models.FloatField(blank=True, null=True)
 
     # genders_accepted = models.CharField(max_length=2000, blank=True, null=True)
     # campus_size = models.CharField(max_length=2000, blank=True, null=True)
