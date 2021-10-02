@@ -13,8 +13,8 @@ class College(models.Model):
     rank = models.IntegerField(blank=True, null=True)
     percentile = models.FloatField(blank=True, null=True)
     avg_percentile = models.FloatField(blank=True, null=True)
-    
-    # weights 
+
+    # weights
     w1 = models.FloatField(blank=True, null=True)
     w2 = models.FloatField(blank=True, null=True)
     w3 = models.FloatField(blank=True, null=True)
@@ -35,6 +35,8 @@ class College(models.Model):
 
     def __str__(self) -> str:
         return f'{self.institute_name}'
+
+
 
 
 class Student(models.Model):
