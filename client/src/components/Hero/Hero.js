@@ -27,7 +27,8 @@ const KuttyHero = () => {
           letterSpacing={{ base: "normal", md: "tight" }}
           color={useColorModeValue("gray.900",'gray.100')}
         >
-          College Recommendation{" "}
+          You are the choices{" "}
+          <br/>
           <Text
             display={{ base: "block", lg: "inline" }}
             w="full"
@@ -35,7 +36,7 @@ const KuttyHero = () => {
             bgGradient="linear(to-r, blue.400,red.500)"
             fontWeight="extrabold"
           >
-              System
+              you make!
           </Text>{" "}
           
         </chakra.h1>
@@ -45,7 +46,7 @@ const KuttyHero = () => {
           fontSize={{ base: "lg", md: "xl" }}
           color={useColorModeValue("gray.600",'gray.300')}
         >
-          A college recommendation system for engineering students 
+          Make this one count
         </chakra.p>
         <Stack
         direction={{base:"column",sm:"row"}}
@@ -104,14 +105,16 @@ const KuttyHero = () => {
         mx="auto"
         mt={20}
         textAlign="center"
+        // justifyContent="center"
       >
-        {/* <Image
+        <Image
           w="full"
           rounded="lg"
-          shadow="2xl"
-          src="https://kutty.netlify.app/hero.jpg"
+          // width={[800,800]}
+          // shadow="2xl"
+          src="dash.png"
           alt="Hellonext feedback boards software screenshot"
-        /> */}
+        />
       </Box>
     </Box>
   );
