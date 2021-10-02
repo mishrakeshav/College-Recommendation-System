@@ -198,12 +198,12 @@ function DashboardContent() {
               <ListItemText style={{color:'#F9F7F7'}} primary="Dashboard" />
             </ListItem>
           
-            <ListItem component={Link} to='/dashboard/recommendation'>
+            {/* <ListItem component={Link} to='/dashboard/recommendation'>
               <ListItemIcon>
                 <BarChartIcon style={{fill:'#F9F7F7'}} />
               </ListItemIcon>
               <ListItemText style={{color:'#F9F7F7'}} primary="Recommendation" />
-            </ListItem>
+            </ListItem> */}
            
           </List>
           <Divider style={{background:'#DBE2EF'}} />

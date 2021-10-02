@@ -196,7 +196,7 @@ const ViewColleges = () => {
                         >
                         </TextField>
                     </Grid>
-                    <Grid item xs={12} sm={12} lg={4}>
+                    <Grid item xs={12} sm={12} lg={6}>
                         <TextField
                             variant="outlined"
                             label="Search By City"
@@ -208,7 +208,7 @@ const ViewColleges = () => {
                         >
                         </TextField>
                     </Grid>
-                    <Grid item xs={12} sm={12} lg={4}>
+                    <Grid item xs={12} sm={12} lg={6}>
                         <TextField
                             variant="outlined"
                             label="Search By Branch"
@@ -256,8 +256,39 @@ const ViewColleges = () => {
                             }
                         </TextField>
                     </Grid> */}
-                    
-                    <Grid item xs={12} sm={12} lg={4}>
+                    <Grid item xs={12} sm={12} lg={6}>
+                        <TextField
+                            variant="outlined"
+                            label="Percentile"
+                            name="percentile__lte"
+                            fullWidth
+                            onChange={handleSearchParameterChange}
+                            value={searchParameters.percentile__lte}
+                            size="small"
+                        >
+                        </TextField>
+                    </Grid>
+                    <Grid item xs={12} sm={12} lg={6}>
+                    <Grid container justifyContent="space-between">
+                        <Grid item>
+                            College
+                        </Grid >
+                        <Grid item>Branch </Grid >
+                    </Grid>
+                    <Slider
+                        min={0}
+                        max={10}
+                        onChange={(e) => {
+                        setSearchParameters({
+                            ...searchParameters,
+                            ordering : `-w${e.target.value}`,
+                        });
+                        }}
+                        aria-label="Default"
+                        valueLabelDisplay="auto"
+                    />
+                    </Grid>
+                    <Grid item xs={12} sm={12} lg={6}>
                         <Typography>Maximum Fees Preference (Per Year)</Typography>
                         <Slider 
                             min={300000}
@@ -269,6 +300,7 @@ const ViewColleges = () => {
                             valueLabelDisplay="auto" 
                         />
                     </Grid>
+                    
                     <Grid item xs={12} sm={12} lg={12}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-multiple-chip-label">Facilities</InputLabel>
