@@ -31,4 +31,4 @@ class CollegeList(generics.ListAPIView):
     search_fields = ['$institute_name', '$state',
                      '$city', '$branch', '$facilities']
     ordering_fields = ['fees', 'rank',
-                       'percentile', 'avg_percentile', 'rating', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7', 'w8', 'w9']
+                       'percentile', 'avg_percentile', 'rating','w0','w1','w10', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7', 'w8', 'w9']
