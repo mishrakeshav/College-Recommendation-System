@@ -13,7 +13,7 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -28,16 +28,19 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-
+import HomeIcon from '@mui/icons-material/Home';
+import { Hidden } from '@mui/material';
 import { 
   BrowserRouter, 
   Switch, 
   Route,
-  useRouteMatch 
+  useRouteMatch,
+  Link 
 } from 'react-router-dom';
 
 import Recommendation from '../Recommendation/Recommendation';
 import ViewColleges from '../ViewColleges/ViewColleges';
+import ViewShortListedColleges from '../ViewShortListedColleges/ViewShortListedColleges';
 
 
 // import Deposits from './Deposits';
@@ -135,19 +138,32 @@ function DashboardContent() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="white"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              College Recommendation System
-            </Typography>
+            <Hidden smDown>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="white"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                College Recommendation System
+              </Typography>
+            </Hidden>
+            <Hidden smUp>
+              <Typography
+                component="h6"
+                variant="h6"
+                color="white"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                CRS
+              </Typography>
+            </Hidden>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              {/* <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
-              </Badge>
+              </Badge> */}
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -166,14 +182,20 @@ function DashboardContent() {
           </Toolbar>
           <Divider style={{background:'#DBE2EF'}} />
           <List>
-            <ListItem component={Link} href='/dashboard/search'>
+          <ListItem component={Link} to='/dashboard/'>
+              <ListItemIcon >
+                <HomeIcon style={{fill:'#F9F7F7'}} />
+              </ListItemIcon>
+              <ListItemText style={{color:'#F9F7F7'}} primary="Dashboard" />
+            </ListItem>
+            <ListItem component={Link} to='/dashboard/search'>
               <ListItemIcon >
                 <DashboardIcon style={{fill:'#F9F7F7'}} />
               </ListItemIcon>
               <ListItemText style={{color:'#F9F7F7'}} primary="Dashboard" />
             </ListItem>
           
-            <ListItem component={Link} href='/dashboard/recommendation'>
+            <ListItem component={Link} to='/dashboard/recommendation'>
               <ListItemIcon>
                 <BarChartIcon style={{fill:'#F9F7F7'}} />
               </ListItemIcon>
@@ -197,7 +219,7 @@ function DashboardContent() {
           <div styles={{margin : '80px'}}>
             <Switch>
               <Route path={path} exact>
-                      Search 
+                <ViewShortListedColleges />
               </Route>
               <Route path={`${path}/search`} exact>
                      <ViewColleges />

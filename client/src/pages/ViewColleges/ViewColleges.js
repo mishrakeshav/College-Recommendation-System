@@ -17,6 +17,9 @@ import {
 
 } from '@mui/material';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,11 +30,13 @@ import useStyles from './styles';
 import SearchIcon from '@mui/icons-material/Search';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-
+import { Hidden } from '@mui/material';
 
 import CollegeFormDialog from '../../components/CollegeFormDialog/CollegeFormDialog';
 
 import { getAllColleges } from '../../api';
+import axios from 'axios';
+
 
 
 
@@ -91,17 +96,21 @@ function getStyles(name, personName, theme) {
 const ViewColleges = () => {
     const [personName, setPersonName] = useState([]);
     const [searchParameters, setSearchParameters] = useState({});
-    const [colleges, setColleges] = useState([
-        {
-            id : 1,
-            institute_name : 'KJ Somaiya Institute of Engineering',
-            state : 'Maharashtra',
-            city : 'Mumbai',
-            branch : 'Information Technology',
-            fees : '100K',
-            package : '12LPA',
-        }
-    ]);
+    const [next, setNext] = useState(null);
+    const [prev, setPrev] = useState(null);
+    const [colleges, setColleges] = useState({
+        results : [
+            {
+                id : 1,
+                institute_name : 'KJ Somaiya Institute of Engineering',
+                state : 'Maharashtra',
+                city : 'Mumbai',
+                branch : 'Information Technology',
+                fees : '100K',
+                package : '12LPA',
+            }
+        ]
+    });
     const theme = useTheme();
     const handleChange = (event) => {
         const {
@@ -116,15 +125,35 @@ const ViewColleges = () => {
         setSearchParameters({...searchParameters, [e.target.name]:e.target.value});
         console.log(searchParameters);
     }
-
+    
     console.log("View")
     const classes = useStyles();
+    const paginationNext = async ()=>{
+        try{
+            console.log(colleges.next);
+            const data = await axios.get(colleges.next);
+            console.log(data);
+            setNext(data?.data?.next);
+            setPrev(data?.data?.prev);
+            setColleges(data?.data);
+         }catch(error){
+            console.log(error);
+        }
+    }
+    const paginationPrev = async ()=>{
+        try{
+            const data = await axios.get(colleges.previous);
+            setColleges(data?.data);
+         }catch(error){
+            console.log(error);
+        }
+    }
     const getData = async ()=>{
         try{
-            const data = await getAllColleges();
-            
-            setColleges(data?.data?.results);
+            console.log(searchParameters)
+            const data = await getAllColleges({...searchParameters});
             console.log(data);
+            setColleges(data?.data);
         }catch(error){
             console.log(error)
         }
@@ -185,7 +214,7 @@ const ViewColleges = () => {
                         >
                         </TextField>
                     </Grid>
-                    <Grid item xs={12} sm={12} lg={4}>
+                    {/* <Grid item xs={12} sm={12} lg={4}>
                         <TextField
                             variant="outlined"
                             label="Sort By"
@@ -202,8 +231,8 @@ const ViewColleges = () => {
                                 ))
                             }
                         </TextField>
-                    </Grid>
-                    <Grid item xs={12} sm={12} lg={4}>
+                    </Grid> */}
+                    {/* <Grid item xs={12} sm={12} lg={4}>
                         <TextField
                             variant="outlined"
                             label="Averegae Placement Package"
@@ -220,7 +249,7 @@ const ViewColleges = () => {
                                 ))
                             }
                         </TextField>
-                    </Grid>
+                    </Grid> */}
                     
                     <Grid item xs={12} sm={12} lg={4}>
                         <Typography>Maximum Fees Preference (Per Year)</Typography>
@@ -268,7 +297,7 @@ const ViewColleges = () => {
                     </Grid>
                     <Grid item xs={12} sm={12} lg={12} justifyContent="center">
                         <div align="center">
-                        <Button variant="contained">
+                        <Button variant="contained" onClick={getData}>
                             <SearchIcon /> Search
                         </Button>
                         </div>
@@ -276,9 +305,12 @@ const ViewColleges = () => {
                 </Grid>
             </Paper>
         </Grid>
+        
         <Grid item xs={12} sm={12} lg={12}>
+        <Hidden smDown>
+
             <Paper className={classes.paper} elevation={5}>
-                <Table>
+                <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
                             {
@@ -292,7 +324,7 @@ const ViewColleges = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {colleges.map((value,idx)=>(
+                        {colleges?.results?.map((value,idx)=>(
                             <TableRow  key={value.id}>
                                 <TableCell>
                                     {value.institute_name}
@@ -320,10 +352,47 @@ const ViewColleges = () => {
                     </TableFooter>
                 </Table>
                 <div align="right">
-                        <Button  ><NavigateBeforeIcon /></Button>
-                        <Button  ><NavigateNextIcon /></Button>
+                        <Button disabled={!colleges.previous} onClick={paginationPrev} ><NavigateBeforeIcon /></Button>
+                        <Button  disabled={!colleges.next} onClick={paginationNext} ><NavigateNextIcon /></Button>
                 </div>
             </Paper>
+        </Hidden>
+        <Hidden smUp>
+        {colleges.results.map((value)=>{
+        return(
+
+        <Grid item xs={12} sm={12} lg={12}>
+            <Card className={classes.card}>
+                <CardContent>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    {value.state} , {value.city}
+                    </Typography>
+                    <Typography variant="h6" component="div">
+                    {value.institute_name}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Fees: {value.fees} INR
+                    </Typography>
+                    <Typography variant="body2">
+                    {value.branch}
+                    
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                <div style={{marginLeft : 'auto'}}>
+
+                    <CollegeFormDialog  value={value} />
+                </div>
+                </CardActions>
+            </Card>
+        </Grid>
+        )
+        })}
+         <div align="right">
+                        <Button disabled={!colleges.previous} onClick={paginationPrev} ><NavigateBeforeIcon /></Button>
+                        <Button  disabled={!colleges.next} onClick={paginationNext} ><NavigateNextIcon /></Button>
+                </div>
+        </Hidden>
         </Grid>
     </Grid>
     )
