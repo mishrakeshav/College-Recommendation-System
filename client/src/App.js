@@ -4,6 +4,7 @@ import { extendTheme } from "@chakra-ui/react"
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
+
 import './App.css';
 import Home from './pages/Home';
 import Layout from './pages/Layout/Layout';

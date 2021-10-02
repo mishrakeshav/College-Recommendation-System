@@ -30,6 +30,9 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeIcon from '@mui/icons-material/Home';
 import { Hidden } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import { 
   BrowserRouter, 
   Switch, 
@@ -232,6 +235,7 @@ function DashboardContent() {
           </div>
         </Box>
       </Box>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

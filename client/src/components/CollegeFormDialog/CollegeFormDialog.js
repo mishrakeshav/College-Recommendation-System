@@ -10,6 +10,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
     Grid
 } from '@mui/material';
+import { toast } from 'react-toastify';
 
 
 function AlertDialog(props) {
@@ -81,6 +82,7 @@ export default function CollegeFormDialog(props) {
           existingCollege.push(value);
       }
       localStorage.setItem('MyColleges', JSON.stringify(existingCollege));
+      toast('College Added to your list')
   }
   const deleteCollegeFromMyList = (college)=>{
     var existingCollege = JSON.parse(localStorage.getItem('MyColleges'));
@@ -150,7 +152,7 @@ export default function CollegeFormDialog(props) {
                     value={props.value.facilities}
                     fullWidth
                     multiline
-                    rows={3}
+                    rows={4}
                     variant="outlined"
                 />
                 </Grid>

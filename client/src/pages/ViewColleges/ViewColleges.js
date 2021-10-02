@@ -151,7 +151,10 @@ const ViewColleges = () => {
     const getData = async ()=>{
         try{
             console.log(searchParameters)
-            const data = await getAllColleges({...searchParameters});
+            const data = await getAllColleges({
+                ...searchParameters,
+                search : personName.join(' ')
+            });
             console.log(data);
             setColleges(data?.data);
         }catch(error){
@@ -164,16 +167,19 @@ const ViewColleges = () => {
     return (
         <Grid container spacing={3} className={classes.padding}>
         <Grid item xs={12} sm={12} lg={12}>
+            {/* <Hidden smUp>
+
+            </Hidden> */}
             <Paper className={classes.paper} elevation={5}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} lg={8}>
                         <TextField
                             variant="outlined"
                             label="Search Institute  Name"
-                            name="institute_name"
+                            name="institute_name__contains"
                             fullWidth
                             onChange={handleSearchParameterChange}
-                            value={searchParameters.institute_name}
+                            value={searchParameters.institute_name__contains}
                             size="small"
                         >
                         </TextField>
@@ -182,10 +188,10 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Search By State"
-                            name="state"
+                            name="state__contains"
                             fullWidth
                             onChange={handleSearchParameterChange}
-                            value={searchParameters.state}
+                            value={searchParameters.state__contains}
                             size="small"
                         >
                         </TextField>
@@ -194,9 +200,9 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Search By City"
-                            name="city"
+                            name="city__contains"
                             onChange={handleSearchParameterChange}
-                            value={searchParameters.city}
+                            value={searchParameters.city__contains}
                             fullWidth
                             size="small"
                         >
@@ -206,10 +212,10 @@ const ViewColleges = () => {
                         <TextField
                             variant="outlined"
                             label="Search By Branch"
-                            name="branch"
+                            name="branch__contains"
                             fullWidth
                             onChange={handleSearchParameterChange}
-                            value={searchParameters.branch}
+                            value={searchParameters.branch__contains}
                             size="small"
                         >
                         </TextField>
@@ -254,10 +260,10 @@ const ViewColleges = () => {
                     <Grid item xs={12} sm={12} lg={4}>
                         <Typography>Maximum Fees Preference (Per Year)</Typography>
                         <Slider 
-                            min={50000}
-                            max={500000}
+                            min={300000}
+                            max={1000000}
                             onChange={(e)=>{
-                                setSearchParameters({...searchParameters, fees: e.target.value })
+                                setSearchParameters({...searchParameters, fees__lte: parseInt(e.target.value) })
                             }}
                             aria-label="Default" 
                             valueLabelDisplay="auto" 
@@ -358,6 +364,10 @@ const ViewColleges = () => {
             </Paper>
         </Hidden>
         <Hidden smUp>
+        <div align="right">
+                        <Button disabled={!colleges.previous} onClick={paginationPrev} ><NavigateBeforeIcon /></Button>
+                        <Button  disabled={!colleges.next} onClick={paginationNext} ><NavigateNextIcon /></Button>
+                </div>
         {colleges.results.map((value)=>{
         return(
 
