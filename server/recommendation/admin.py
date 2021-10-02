@@ -10,9 +10,7 @@ class CollegeAdmin(admin.ModelAdmin):
         'city', 
         'branch', 
         'fees', 
-        'package',
-        'cet_marks', 
-        'jee_marks',
+        'rank',
         'rating'
     )
     list_display_links = ('id','institute_name')
@@ -23,11 +21,8 @@ class CollegeAdmin(admin.ModelAdmin):
         'city', 
         'branch', 
         'fees', 
-        'package',
-        'cet_marks', 
-        'jee_marks',
-        'rating',
-        'facilities'
+        'rank',
+        'rating'
     )
     list_per_page = 40
 

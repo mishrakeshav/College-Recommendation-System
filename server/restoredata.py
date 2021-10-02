@@ -8,24 +8,33 @@ from django.core.management import call_command
 
 import pandas as pd
 from recommendation.models import College
-df = pd.read_csv('../dataset/database.csv', sep=',')
+df = pd.read_csv('../dataset/finalultrapromax.csv', sep=',')
 colleges = []
 for i in range(1,len(df)):
     colleges.append(
         College(
-            institute_name=df.iloc[i][2],
-            state = df.iloc[i][23],
-            city = df.iloc[i][22],
-            branch = df.iloc[i][3],
-            fees = df.iloc[i][26],
-            genders_accepted = df.iloc[i][14],
-            jee_marks = df.iloc[i][13],
+            institute_name=df.iloc[i][1],
+            state = 'Maharashtra',
+            city = df.iloc[i][19],
+            branch = df.iloc[i][2],
+            fees = df.iloc[i][7],
+            rank = df.iloc[i][4],
+            percentile = df.iloc[i][5],
+            avg_percentile = df.iloc[i][9],
+            w1 = df.iloc[i][10],
+            w2 = df.iloc[i][11],
+            w3 = df.iloc[i][12],
+            w4 = df.iloc[i][13],
+            w5 = df.iloc[i][14],
+            w6 = df.iloc[i][15],
+            w7 = df.iloc[i][16],
+            w8 = df.iloc[i][17],
+            w9 = df.iloc[i][18],
             # campus_size = df.iloc[i][15],
-            established_year = df.iloc[i][18],
-            rating = df.iloc[i][19],
-            university = df.iloc[i][20],
-            facilities = df.iloc[i][21],
-            college_type = df.iloc[i][25],
+            rating = df.iloc[i][8],
+            # university = df.iloc[i][20],
+            facilities = df.iloc[i][6],
+            # college_type = df.iloc[i][25],
         )
     )
 

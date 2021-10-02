@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-     'jazzmin',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,12 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'recommendation.apps.RecommendationConfig'
+    'recommendation.apps.RecommendationConfig',
+    'django_filters',
+      'corsheaders',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,13 +84,12 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-<<<<<<< HEAD
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-=======
-        'NAME': os.path.join(BASE_DIR , 'db.sqlite3'),
->>>>>>> 2cea9bfd2affb4a5f6c6f6d8b0cd9bc1c7ef2667
     }
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
 
 
 # Password validation
@@ -135,11 +138,6 @@ STATICFILES_DIRS = [
 ]
 
 
-
-
-
-
-
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "Student College Recommendation System",
@@ -151,7 +149,7 @@ JAZZMIN_SETTINGS = {
     "site_logo": "images/studentlogo1.png",
     # Welcome text on the login screen
     "welcome_sign": "Login as Admin",
-    
+
 
     # Copyright on the footer
     "copyright": "Team Ukku 2021",
@@ -162,19 +160,20 @@ JAZZMIN_SETTINGS = {
     # Field name on user model that contains avatar image
     "user_avatar": None,
 
-     "topmenu_links": [
+    "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Home",  "url": "admin:index",
+            "permissions": ["auth.view_user"]},
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
     ],
-        # Additional links to include in the user menu on the top right ("app" url type is not allowed)
+    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
         {"model": "auth.user"}
     ],
 
-        # Whether to display the side menu
+    # Whether to display the side menu
     "show_sidebar": True,
 
     # Whether to aut expand the menu
@@ -182,7 +181,7 @@ JAZZMIN_SETTINGS = {
 
     "order_with_respect_to": ["auth", ],
 
-        # Use modals instead of popups
+    # Use modals instead of popups
     "related_modal_active": True,
     # Render out the change view as a single form, or in tabs, current options are
     # - single
@@ -193,5 +192,12 @@ JAZZMIN_SETTINGS = {
     "show_ui_builder": True,
     "changeform_format": "horizontal_ttabs",
 
-    
+
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
