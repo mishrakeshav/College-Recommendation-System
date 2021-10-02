@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import College
-from .serializers import CollegeSerializer
+from .serializers import CollegeSerializer, CollegeBranchSerializer
 import django_filters.rest_framework
 from rest_framework import filters
 from django.shortcuts import get_object_or_404
@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 
 class CollegeDetail(generics.RetrieveAPIView):
     queryset = College.objects.all()
-    serializer_class = CollegeSerializer
+    serializer_class = CollegeBranchSerializer
 
 
 class CollegeList(generics.ListAPIView):

@@ -10,6 +10,24 @@ class StudentSerializer(serializers.ModelSerializer):
 
 
 class CollegeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = College
+        fields = [
+            'id',
+            'institute_name',
+            'percentile',
+            'avg_percentile',
+            'state',
+            'city',
+            'branch',
+            'fees',
+            'rank',
+            'rating',
+            'facilities',
+        ]
+
+
+class CollegeBranchSerializer(serializers.ModelSerializer):
 
     college_branch = serializers.SerializerMethodField()
 
