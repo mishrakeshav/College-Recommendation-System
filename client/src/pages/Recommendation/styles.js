@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme)=>({
   paper : {
       borderRadius : theme.spacing(2),
       padding : theme.spacing(5),
-      background:"#DBE2EF",
+      // background:"#DBE2EF",
       // color:"white"
   },
   input:

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {
     Grid, 
     Paper,
@@ -31,7 +31,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import CollegeFormDialog from '../../components/CollegeFormDialog/CollegeFormDialog';
 
-
+import { getAllColleges } from '../../api';
 
 
 
@@ -53,7 +53,6 @@ const tableCells = [
     { key : 'city', label : 'City'},
     { key : 'branch', label : 'Branch'},
     { key : 'fees', label : 'Fees'},
-    { key : 'avg_placement', label : 'Averege Placement Package'},
     { key : 'view', label : 'View'},
 ]
 
@@ -120,6 +119,19 @@ const ViewColleges = () => {
 
     console.log("View")
     const classes = useStyles();
+    const getData = async ()=>{
+        try{
+            const data = await getAllColleges();
+            
+            setColleges(data?.data?.results);
+            console.log(data);
+        }catch(error){
+            console.log(error)
+        }
+    }
+    useEffect(()=>{
+        getData();
+    },[])
     return (
         <Grid container spacing={3} className={classes.padding}>
         <Grid item xs={12} sm={12} lg={12}>
@@ -296,9 +308,6 @@ const ViewColleges = () => {
                                 </TableCell>
                                 <TableCell>
                                     {value.fees}
-                                </TableCell>
-                                <TableCell>
-                                    {value.package}
                                 </TableCell>
                                 <TableCell>
                                     <CollegeFormDialog value={value} />

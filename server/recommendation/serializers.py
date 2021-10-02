@@ -12,5 +12,15 @@ class StudentSerializer(serializers.ModelSerializer):
 class CollegeSerializer(serializers.ModelSerializer):
     class Meta:
         model = College
-        fields = ['institute_name', 'state', 'city', 'branch', 'fees', 'package', 'cet_marks', 'jee_marks',
-                  'genders_accepted', 'campus_size', 'established_year', 'rating', 'university', 'facilities', 'college_type']
+        fields = [
+        'institute_name',
+        'percentile',
+        'avg_percentile',
+        'state',
+        'city',
+        'branch',
+        'fees',
+        'rank',
+        'rating',
+        'facilities'
+    ]
