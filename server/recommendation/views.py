@@ -9,25 +9,20 @@ class CollegeList(generics.ListAPIView):
     queryset = College.objects.all()
     serializer_class = CollegeSerializer
     filterset_fields = {
-        'institute_name': ['contains'],
-        'state': ['contains'],
-        'city':  ['contains'],
-        'branch': ['contains'],
         'fees': ['exact', 'gte', 'lte'],
         'rank': ['exact', 'gte', 'lte'],
         'percentile': ['exact', 'gte', 'lte'],
         'avg_percentile': ['exact', 'gte', 'lte'],
         'rating': ['exact', 'gte', 'lte'],
-        'facilities':  ['contains'], }
+        'institute_name': ['contains'],
+        'state': ['contains'],
+        'city': ['contains'],
+        'branch': ['contains'],
+    }
 
     filter_backends = [
         django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['$institute_name', '$state', '$city', '$branch', '$fees',
-                     '$rank', '$percentile', '$avg_percentile', '$rating', '$facilities']
+    search_fields = ['$institute_name', '$state',
+                     '$city', '$branch', '$facilities']
     ordering_fields = ['fees', 'rank',
-                       'percentile', 'avg_percentile', 'rating']
-
-    def get_queryset(self):
-        print('here')
-
-        return super().get_queryset()
+                       'percentile', 'avg_percentile', 'rating', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7', 'w8', 'w9']
