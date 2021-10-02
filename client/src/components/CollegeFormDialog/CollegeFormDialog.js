@@ -70,12 +70,25 @@ export default function CollegeFormDialog(props) {
                     variant="outlined"
                 />
                 </Grid>
+                
+                <Grid item xs={12} sm={12} lg={12}>
+                    <TextField
+                    margin="dense"
+                    id="name"
+                    label="Facilities"
+                    value={props.value.facilities}
+                    fullWidth
+                    multiline
+                    rows={3}
+                    variant="outlined"
+                />
+                </Grid>
                 <Grid item xs={12} sm={12} lg={6}>
                     <TextField
                     margin="dense"
                     id="name"
-                    label="Package"
-                    value={props.value.package}
+                    label="Percentile"
+                    value={props.value.percentile}
                     fullWidth
                     variant="outlined"
                 />
@@ -84,8 +97,8 @@ export default function CollegeFormDialog(props) {
                     <TextField
                     margin="dense"
                     id="name"
-                    label="Cut-Off"
-                    value={props.value.package}
+                    label="Average Percentile"
+                    value={props.value.avg_percentile}
                     fullWidth
                     variant="outlined"
                 />
@@ -95,10 +108,13 @@ export default function CollegeFormDialog(props) {
                         margin="dense"
                         id="name"
                         label="Ranking"
-                        value={props.value.package}
+                        value={props.value.rank}
                         fullWidth
                         variant="outlined"
                     />
+                </Grid>
+                <Grid item xs={12} sm={12} lg={12} align="center">
+                    <Button variant="contained">Add College to My List</Button>
                 </Grid>
           </Grid>
           
