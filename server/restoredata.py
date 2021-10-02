@@ -9,6 +9,9 @@ from django.core.management import call_command
 import pandas as pd
 from recommendation.models import College
 df = pd.read_csv('../dataset/database.csv', sep=',')
+
+df.dropna(inplace=True)
+
 colleges = []
 for i in range(1,len(df)):
     colleges.append(
